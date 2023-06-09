@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 600px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <a href="{{ path('app_book') }}" class="btn btn-light btn-lg w-100"><h1>{{ title }}</h1></a>
+    <div class="mt-2 d-flex justify-content-between">
+        <a href="{{ path('app_author_add') }}" class="btn btn-light btn-sm flex-grow-1 me-1">Add Author</a>
+        <a href="{{ path('app_book') }}" class="btn btn-light btn-sm ms-1">Book List</a>
+    </div>
+    <hr>
+    <section>
+        <ul class="list-group">
+            {% for author in authors %}
+            <li class="list-group-item d-flex justify-content-between">
+                <a href="{{ path('app_author_show',{id : author.id}) }}" class="btn btn-light btn-lg w-100">{{ author.name }}</a>
+                <div class="ms-2">
+                    <a href="{{ path('app_author_edit',{id : author.id}) }}" class="btn btn-light btn-sm w-100">Edit</a>
+                    <a href="{{ path('app_author_delete', {'id': author.id}) }}" class="btn btn-light btn-sm w-100">Delete</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="list-group-item">
+                <h2 class="text-center h4 m-0">Nothing Found</h2>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}
